@@ -1,7 +1,7 @@
 #include "mandelbrot.hpp"
 
 Mandelbrot::Mandelbrot(int size)
-    : dimension(size), low_x(-2), high_x(1), low_y(-1), high_y(1)
+    : dimension(size), low_x(-2), high_x(0.5), low_y(-1), high_y(1)
 {
     pixels = new byte[size*size];
 }
@@ -35,7 +35,10 @@ void Mandelbrot::calculate()
             {
                 current = current.square()+c;
                 if (current.abssqr() > 4)
+                {
+                    pixels[x+dimension*y] = i*2.55;
                     unbounded = true;
+                }
             }
             if (!unbounded)
                 pixels[x+dimension*y] = 0;
