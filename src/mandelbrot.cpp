@@ -30,14 +30,14 @@ void Mandelbrot::calculate()
 
             Complex current = c;
             int max_iters = 100;
-            bool found = false;
+            bool unbounded = false;
             for(int i = 0; i < max_iters; ++i)
             {
                 current = current.square()+c;
                 if (current.abssqr() > 4)
-                    found = true;
+                    unbounded = true;
             }
-            if (!found)
+            if (!unbounded)
                 pixels[x+dimension*y] = 0;
         }
     }
