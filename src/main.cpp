@@ -5,11 +5,14 @@
 #include "mandelbrot.hpp"
 #include "event_handler.hpp"
 
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 1000
+
 int main(int argc, char* argv[])
 {
-    window window(1000, 1000);
+    window window(WINDOW_WIDTH, WINDOW_HEIGHT);
     EventHandler eh;
-    Mandelbrot m(1000);
+    Mandelbrot m(WINDOW_WIDTH);
 
     window.createWindow();
 
