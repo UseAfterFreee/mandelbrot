@@ -20,5 +20,6 @@ class Mandelbrot
         ~Mandelbrot();
 
         void calculate();
+        void change_complex_dimensions(double lx, double hx, double ly, double hy);
         void draw(SDL_Renderer* r);
 };

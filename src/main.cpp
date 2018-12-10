@@ -17,10 +17,10 @@ int main(int argc, char* argv[])
     window.createWindow();
 
     m.calculate();
+    m.change_complex_dimensions(-1,0,-1,0);
     while (!eh.needQuit())
     {
         eh.handleEvents();
-        window.drawBackground(255,0,0);
 
         m.draw(window.getRenderer());
 

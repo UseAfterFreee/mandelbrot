@@ -31,7 +31,7 @@ void Mandelbrot::calculate()
         {
             pixels[x+width*y] = 255;
             double real = map(x, 0, width, low_x, high_x);
-            double imag = map(y, 0, height, low_y, high_y);
+            double imag = map(y, 0, height, high_y, low_y); // Flipped x and y because pixels start at the top
             Complex c(real, imag);
 
             Complex current = c;
@@ -63,4 +63,13 @@ void Mandelbrot::draw(SDL_Renderer* r)
             SDL_RenderDrawPoint(r, x, y);
         }
     }
+}
+
+void Mandelbrot::change_complex_dimensions(double lx, double hx, double ly, double hy)
+{
+    low_x = lx;
+    low_y = ly;
+    high_x = hx;
+    high_y = hy;
+    calculate();
 }
