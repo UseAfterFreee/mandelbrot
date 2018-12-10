@@ -53,7 +53,7 @@ void Mandelbrot::draw(SDL_Renderer* r)
         for (int y = 0; y<dimension; ++y)
         {
             int index = x+dimension*y;
-            SDL_SetRenderDrawColor(r, pixels[index], pixels[index], pixels[index], 255);
+            SDL_SetRenderDrawColor(r, 0, pixels[index], 0, 255);
             SDL_RenderDrawPoint(r, x, y);
         }
     }
