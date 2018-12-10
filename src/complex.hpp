@@ -1,3 +1,6 @@
+#ifndef COMPLEX_H
+#define COMPLEX_H
+
 #include <iostream>
 
 class Complex
@@ -15,3 +18,5 @@ class Complex
 
         friend std::ostream& operator<<(std::ostream& os, const Complex& c);
 };
+
+#endif

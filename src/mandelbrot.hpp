@@ -1,7 +1,11 @@
+#ifndef MANDELBROT_H
+#define MANDELBROT_H
+
 #include "complex.hpp"
 #include <SDL2/SDL.h>
 
 typedef char byte;
+
 
 class Mandelbrot
 {
@@ -21,5 +25,8 @@ class Mandelbrot
 
         void calculate();
         void change_complex_dimensions(double lx, double hx, double ly, double hy);
+        void reset_complex_dimensions();
         void draw(SDL_Renderer* r);
 };
+
+#endif

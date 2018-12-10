@@ -1,13 +1,18 @@
 #include "mandelbrot.hpp"
 
+#define DEFAULT_LX -2
+#define DEFAULT_HX  1
+#define DEFAULT_LY -1
+#define DEFAULT_HY  1
+
 Mandelbrot::Mandelbrot(int size)
-    : width(size), height(size), low_x(-2), high_x(0.5), low_y(-1), high_y(1)
+    : width(size), height(size), low_x(DEFAULT_LX), high_x(DEFAULT_HX), low_y(DEFAULT_LY), high_y(DEFAULT_HY)
 {
     pixels = new byte[size*size];
 }
 
 Mandelbrot::Mandelbrot(int width, int height)
-    : width(width), height(height), low_x(-2), high_x(0.5), low_y(-1), high_y(1)
+    : width(width), height(height), low_x(DEFAULT_LX), high_x(DEFAULT_HX), low_y(DEFAULT_LY), high_y(DEFAULT_HY)
 {
     pixels = new byte[width*height];
 }
@@ -68,8 +73,17 @@ void Mandelbrot::draw(SDL_Renderer* r)
 void Mandelbrot::change_complex_dimensions(double lx, double hx, double ly, double hy)
 {
     low_x = lx;
-    low_y = ly;
     high_x = hx;
+    low_y = ly;
     high_y = hy;
+    calculate();
+}
+
+void Mandelbrot::reset_complex_dimensions()
+{
+    low_x = DEFAULT_LX;
+    high_x = DEFAULT_HX;
+    low_y = DEFAULT_LY;
+    high_y = DEFAULT_HY;
     calculate();
 }
