@@ -6,8 +6,8 @@
 class Complex
 {
     private:
-        double real, imag;
     public:
+        double real, imag;
         Complex(double real, double imag);
 
         Complex operator+(const Complex& rhs) const;

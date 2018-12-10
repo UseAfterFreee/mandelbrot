@@ -24,6 +24,7 @@ class Mandelbrot
         ~Mandelbrot();
 
         void calculate();
+        Complex GetComplexFromPixel(int x, int y);
         void change_complex_dimensions(double lx, double hx, double ly, double hy);
         void reset_complex_dimensions();
         void draw(SDL_Renderer* r);

@@ -28,16 +28,22 @@ double Mandelbrot::map(double x, double low, double high, double newlow, double 
     return newlow + percentage * (newhigh - newlow);
 }
 
+Complex Mandelbrot::GetComplexFromPixel(int x, int y)
+{
+    double real = map(x, 0, width, low_x, high_x);
+    double imag = map(y, 0, height, high_y, low_y); // Flipped x and y because pixels start at the top
+    return Complex(real, imag);
+}
+
 void Mandelbrot::calculate()
 {
     for (int x = 0; x<width; ++x)
     {
         for (int y = 0; y<height; ++y)
         {
-            pixels[x+width*y] = 255;
-            double real = map(x, 0, width, low_x, high_x);
-            double imag = map(y, 0, height, high_y, low_y); // Flipped x and y because pixels start at the top
-            Complex c(real, imag);
+            int index = x + width * y;
+
+            Complex c = GetComplexFromPixel(x, y);
 
             Complex current = c;
             int max_iters = 100;
@@ -47,12 +53,12 @@ void Mandelbrot::calculate()
                 current = current.square()+c;
                 if (current.abssqr() > 4)
                 {
-                    pixels[x+width*y] = i*(255/max_iters);
+                    pixels[index] = i*(255/max_iters);
                     unbounded = true;
                 }
             }
             if (!unbounded)
-                pixels[x+width*y] = 0;
+                pixels[index] = 0;
         }
     }
 }
