@@ -36,7 +36,7 @@ void Mandelbrot::calculate()
                 current = current.square()+c;
                 if (current.abssqr() > 4)
                 {
-                    pixels[x+dimension*y] = i*2.55;
+                    pixels[x+dimension*y] = i*(255/max_iters);
                     unbounded = true;
                 }
             }
