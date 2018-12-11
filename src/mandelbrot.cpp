@@ -35,15 +35,44 @@ Complex Mandelbrot::GetComplexFromPixel(int x, int y)
     return Complex(real, imag);
 }
 
+double Mandelbrot::GetYFromImag(double imag)
+{
+    return map(imag, high_y, low_y, 0, height); // Flipped x and y because pixels start at the top
+}
+
 void Mandelbrot::calculate()
 {
-    for (int x = 0; x<width; ++x)
+    for (int y = 0; y<height; ++y)
     {
-        for (int y = 0; y<height; ++y)
+        for (int x = 0; x<width; ++x)
         {
             int index = x + width * y;
 
             Complex c = GetComplexFromPixel(x, y);
+
+            /* See wikipedia page on mandelbrot for this optimization */
+            double q = (c.real-(1/4.0))*(c.real-(1/4.0)) + c.imag*c.imag;
+            if (q*(q+(c.real-(1/4.0))) <= (1/4.0)*c.imag*c.imag)
+            {
+                pixels[index] = 0;
+                continue;
+            }
+
+            if (low_y < 0 && high_y > 0)
+            {
+                /* Optimization possible because mandelbrot is symmetric */
+                if (high_y + low_y >= 0)
+                {
+                    /* More pixels above y=0 */
+                    if (c.imag < 0)
+                    {
+                        double pixely0 = GetYFromImag(0);
+                        double curry = GetYFromImag(c.imag); // LMAO variable naming
+                        pixels[index] = pixels[x + width * (int)(pixely0 - (curry - pixely0))]; // Weird math stuff
+                        continue;
+                    }
+                }
+            }
 
             Complex current = c;
             int max_iters = 100;

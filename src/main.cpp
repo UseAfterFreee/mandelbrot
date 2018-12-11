@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     window.createWindow();
 
-    m.change_complex_dimensions(-0.8, -0.5, -0.75, -0.25);
+    m.calculate();
     while (!eh.needQuit())
     {
         eh.handleEvents(m);
